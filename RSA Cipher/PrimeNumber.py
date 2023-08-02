@@ -121,7 +121,7 @@ def generateLargePrime(keysize=1024):
     # Return a random prime number that is keysize bits in size.
 
     ks1 = 2**(keysize - 1)
-    ks2 = ks1 * 2
+    ks2 = ks1 * 2                # equivalent to 2**keySize
 
     while True:
         num = random.randrange(ks1, ks2)
