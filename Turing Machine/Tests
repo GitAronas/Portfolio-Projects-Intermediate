@@ -25,7 +25,7 @@ def test0():
 
     tape = [B, B, 0, 1, 1, B, B]
 
-    print(f'{-1:>3}: ', *tape)
+    print(f'{0:>3}: ', *tape)
 
     p, s = turingMachine(INSTRUCTIONS, tape)
 
@@ -45,7 +45,7 @@ def test1():
 
     tape = [B, 1, 0, 1, B]
 
-    print(f'{-1:>3}: ', *tape)
+    print(f'{0:>3}: ', *tape)
 
     p, s = turingMachine(instructions, tape)
 
