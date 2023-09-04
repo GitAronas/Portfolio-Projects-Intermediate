@@ -1,0 +1,57 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Aug 31 12:49:58 2023
+
+@author: Amar Doshi
+"""
+
+'''
+Instruction format:
+
+    (current state, current symbol, next state, next symbol, direction of move)
+
+    where direction of move: -1 | 0 | 1
+'''
+
+
+def turingMachine(INSTRUCTIONS: tuple[tuple],
+                  tape: list,
+                  BLANK: str = '',
+                  MAX_OPERATIONS: int = 100         # To prevent infinite loops
+                  ) -> tuple[int, str]:
+
+    # Find starting position
+    for i in range(len(tape)):
+        if tape[i] != BLANK:
+            current_position = i
+            break
+    else:
+        return 0, 'No valid starting position found'
+
+    current_state = 1
+
+    for opertion in range(1, MAX_OPERATIONS + 1):
+        current_symbol = tape[current_position]
+
+        for i, instruction in enumerate(INSTRUCTIONS):
+            cr_st, cr_sy, nxt_st, nxt_sy, mov_dir = instruction
+
+            if cr_st == current_state and cr_sy == current_symbol:
+                tape[current_position] = nxt_sy
+                current_state = nxt_st
+
+                current_position += mov_dir
+
+                if current_position < 0:
+                    current_position = 0
+                    tape.insert(0, BLANK)
+                elif current_position == len(tape):
+                    tape.append(BLANK)
+
+                break
+        else:
+            return opertion, 'Halted'
+
+        print(f'{i:>3}: ', *tape)
+
+    return opertion, 'Max operations reached'
