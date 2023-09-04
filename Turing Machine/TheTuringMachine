@@ -30,11 +30,13 @@ def turingMachine(INSTRUCTIONS: tuple[tuple],
 
     current_state = 1
 
+    ins_len = len(INSTRUCTIONS)
+
     for opertion in range(1, MAX_OPERATIONS + 1):
         current_symbol = tape[current_position]
 
-        for i, instruction in enumerate(INSTRUCTIONS):
-            cr_st, cr_sy, nxt_st, nxt_sy, mov_dir = instruction
+        for i in range(ins_len):
+            cr_st, cr_sy, nxt_st, nxt_sy, mov_dir = INSTRUCTIONS[i]
 
             if cr_st == current_state and cr_sy == current_symbol:
                 tape[current_position] = nxt_sy
@@ -52,6 +54,6 @@ def turingMachine(INSTRUCTIONS: tuple[tuple],
         else:
             return opertion, 'Halted'
 
-        print(f'{i:>3}: ', *tape)
+        print(f'{i + 1:>3}: ', *tape)
 
     return opertion, 'Max operations reached'
